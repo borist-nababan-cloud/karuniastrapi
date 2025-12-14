@@ -4,4 +4,15 @@ export default ({ env }) => ({
   app: {
     keys: env.array('APP_KEYS'),
   },
+  webhooks: {
+    populateRelations: true,
+  },
+  http: {
+    middleware: {
+      cors: {
+        origin: ['http://localhost:3000', 'http://localhost:1337', 'http://localhost:8080'],
+        credentials: true,
+      },
+    },
+  },
 });

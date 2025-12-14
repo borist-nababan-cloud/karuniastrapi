@@ -10,6 +10,7 @@
     "dev": "strapi develop",
     "develop": "strapi develop",
     "seed:example": "node ./scripts/seed.js",
+    "set-permissions": "node ./scripts/set-permissions.js",
     "start": "strapi start",
     "strapi": "strapi",
     "upgrade": "npx @strapi/upgrade latest",
@@ -17,6 +18,7 @@
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.31.3",
+    "@strapi/plugin-documentation": "^5.32.0",
     "@strapi/plugin-users-permissions": "5.31.3",
     "@strapi/strapi": "5.31.3",
     "fs-extra": "^10.0.0",
