@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vehicle_groups",
+  "info": {
+    "singularName": "vehicle-group",
+    "pluralName": "vehicle-groups",
+    "displayName": "Vehicle Group",
+    "description": "Vehicle grouping for categorization"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "vehicleTypes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::vehicle-type.vehicle-type",
+      "mappedBy": "group"
+    }
+  }
+}

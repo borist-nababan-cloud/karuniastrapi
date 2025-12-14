@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vehicle_types",
+  "info": {
+    "singularName": "vehicle-type",
+    "pluralName": "vehicle-types",
+    "displayName": "Vehicle Type",
+    "description": "Vehicle types categorized by group"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "group": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::vehicle-group.vehicle-group"
+    },
+    "spks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::spk.spk",
+      "mappedBy": "vehicleType"
+    }
+  }
+}
