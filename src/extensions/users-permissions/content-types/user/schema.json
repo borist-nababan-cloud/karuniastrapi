@@ -79,38 +79,6 @@
         "SPV",
         "ADMIN"
       ]
-    },
-    "isApproved": {
-      "type": "boolean",
-      "default": false
-    },
-    "lastLocation": {
-      "type": "json"
-    },
-    "spks_sales": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::spk.spk",
-      "mappedBy": "sales"
-    },
-    "attendances": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::attendance.attendance",
-      "mappedBy": "user"
-    },
-    "profile_picture": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files"
-      ]
-    },
-    "supervisor": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::supervisor.supervisor"
     }
   }
 }

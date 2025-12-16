@@ -566,10 +566,6 @@ export interface ApiAttendanceAttendance extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user: Schema.Attribute.Relation<
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
   };
 }
 
@@ -622,6 +618,7 @@ export interface ApiBranchBranch extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::attendance.attendance'
     >;
+    city: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -634,11 +631,13 @@ export interface ApiBranchBranch extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     longitude: Schema.Attribute.Decimal;
     name: Schema.Attribute.String & Schema.Attribute.Required;
+    phone_number: Schema.Attribute.String;
+    province: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    spks: Schema.Attribute.Relation<'oneToMany', 'api::spk.spk'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    whatsapp_number: Schema.Attribute.String;
   };
 }
 
@@ -668,6 +667,31 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiColorColor extends Struct.CollectionTypeSchema {
+  collectionName: 'colors';
+  info: {
+    displayName: 'color';
+    pluralName: 'colors';
+    singularName: 'color';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    colorname: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::color.color'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -706,49 +730,51 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiSpkSpk extends Struct.CollectionTypeSchema {
-  collectionName: 'spks';
+export interface ApiSalesProfileSalesProfile
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'sales_profiles';
   info: {
-    description: 'Sales Order (Surat Pesanan Kendaraan)';
-    displayName: 'SPK';
-    pluralName: 'spks';
-    singularName: 'spk';
+    displayName: 'sales_profile';
+    pluralName: 'sales-profiles';
+    singularName: 'sales-profile';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    branch: Schema.Attribute.Relation<'manyToOne', 'api::branch.branch'>;
+    address: Schema.Attribute.String;
+    approved: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    blocked: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    city: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    customerEmail: Schema.Attribute.Email;
-    customerName: Schema.Attribute.String & Schema.Attribute.Required;
-    customerPhone: Schema.Attribute.String;
-    documents: Schema.Attribute.Media<'images' | 'files' | 'videos', true>;
-    isEditable: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    email: Schema.Attribute.Email;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::spk.spk'> &
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sales-profile.sales-profile'
+    > &
       Schema.Attribute.Private;
-    notes: Schema.Attribute.Text;
-    paymentProofs: Schema.Attribute.Media<'images' | 'files', true>;
-    publishedAt: Schema.Attribute.DateTime;
-    sales: Schema.Attribute.Relation<
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    spkNumber: Schema.Attribute.String &
+    location: Schema.Attribute.JSON;
+    namasupervisor: Schema.Attribute.String;
+    online_stat: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    status: Schema.Attribute.Enumeration<['ON PROGRESS', 'FINISH']> &
-      Schema.Attribute.DefaultTo<'ON PROGRESS'>;
+      Schema.Attribute.DefaultTo<false>;
+    phonenumber: Schema.Attribute.String;
+    photo_profile: Schema.Attribute.Media<'images' | 'files'>;
+    province: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    sales_uid: Schema.Attribute.UID & Schema.Attribute.Required;
+    surename: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    vehicleType: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::vehicle-type.vehicle-type'
-    >;
+    wanumber: Schema.Attribute.String;
   };
 }
 
@@ -760,7 +786,7 @@ export interface ApiSupervisorSupervisor extends Struct.CollectionTypeSchema {
     singularName: 'supervisor';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -779,10 +805,6 @@ export interface ApiSupervisorSupervisor extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    users: Schema.Attribute.Relation<
-      'oneToMany',
-      'plugin::users-permissions.user'
-    >;
   };
 }
 
@@ -813,10 +835,6 @@ export interface ApiVehicleGroupVehicleGroup
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    vehicleTypes: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::vehicle-type.vehicle-type'
-    >;
   };
 }
 
@@ -835,10 +853,9 @@ export interface ApiVehicleTypeVehicleType extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    group: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::vehicle-group.vehicle-group'
-    >;
+    harga_otr: Schema.Attribute.BigInteger &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'0'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -847,10 +864,10 @@ export interface ApiVehicleTypeVehicleType extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    spks: Schema.Attribute.Relation<'oneToMany', 'api::spk.spk'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    vehicle_group: Schema.Attribute.String;
   };
 }
 
@@ -941,6 +958,51 @@ export interface PluginContentReleasesReleaseAction
     >;
     type: Schema.Attribute.Enumeration<['publish', 'unpublish']> &
       Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface PluginGoogleMapsConfig extends Struct.SingleTypeSchema {
+  collectionName: 'google_maps_configs';
+  info: {
+    displayName: 'Google Maps Config';
+    pluralName: 'configs';
+    singularName: 'config';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    defaultLatitude: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<''>;
+    defaultLongitude: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<''>;
+    googleMapsKey: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<''>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::google-maps.config'
+    > &
+      Schema.Attribute.Private;
+    mapId: Schema.Attribute.String & Schema.Attribute.DefaultTo<'DEMO_MAP_ID'>;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1310,10 +1372,6 @@ export interface PluginUsersPermissionsUser
     draftAndPublish: false;
   };
   attributes: {
-    attendances: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::attendance.attendance'
-    >;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1326,8 +1384,6 @@ export interface PluginUsersPermissionsUser
         minLength: 6;
       }>;
     fullName: Schema.Attribute.String;
-    isApproved: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    lastLocation: Schema.Attribute.JSON;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1341,7 +1397,6 @@ export interface PluginUsersPermissionsUser
         minLength: 6;
       }>;
     phone: Schema.Attribute.String;
-    profile_picture: Schema.Attribute.Media<'images' | 'files'>;
     provider: Schema.Attribute.String & Schema.Attribute.DefaultTo<'local'>;
     publishedAt: Schema.Attribute.DateTime;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
@@ -1350,11 +1405,6 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.role'
     >;
     role_custom: Schema.Attribute.Enumeration<['SALES', 'SPV', 'ADMIN']>;
-    spks_sales: Schema.Attribute.Relation<'oneToMany', 'api::spk.spk'>;
-    supervisor: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::supervisor.supervisor'
-    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1386,13 +1436,15 @@ declare module '@strapi/strapi' {
       'api::author.author': ApiAuthorAuthor;
       'api::branch.branch': ApiBranchBranch;
       'api::category.category': ApiCategoryCategory;
+      'api::color.color': ApiColorColor;
       'api::global.global': ApiGlobalGlobal;
-      'api::spk.spk': ApiSpkSpk;
+      'api::sales-profile.sales-profile': ApiSalesProfileSalesProfile;
       'api::supervisor.supervisor': ApiSupervisorSupervisor;
       'api::vehicle-group.vehicle-group': ApiVehicleGroupVehicleGroup;
       'api::vehicle-type.vehicle-type': ApiVehicleTypeVehicleType;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
+      'plugin::google-maps.config': PluginGoogleMapsConfig;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::review-workflows.workflow': PluginReviewWorkflowsWorkflow;
       'plugin::review-workflows.workflow-stage': PluginReviewWorkflowsWorkflowStage;

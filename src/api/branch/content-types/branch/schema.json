@@ -25,17 +25,23 @@
     "longitude": {
       "type": "decimal"
     },
-    "spks": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::spk.spk",
-      "mappedBy": "branch"
-    },
     "attendances": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::attendance.attendance",
       "mappedBy": "branch"
+    },
+    "city": {
+      "type": "string"
+    },
+    "province": {
+      "type": "string"
+    },
+    "phone_number": {
+      "type": "string"
+    },
+    "whatsapp_number": {
+      "type": "string"
     }
   }
 }

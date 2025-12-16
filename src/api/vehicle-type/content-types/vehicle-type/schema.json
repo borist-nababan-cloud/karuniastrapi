@@ -16,16 +16,13 @@
       "type": "string",
       "required": true
     },
-    "group": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::vehicle-group.vehicle-group"
+    "vehicle_group": {
+      "type": "string"
     },
-    "spks": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::spk.spk",
-      "mappedBy": "vehicleType"
+    "harga_otr": {
+      "type": "biginteger",
+      "required": true,
+      "default": "0"
     }
   }
 }

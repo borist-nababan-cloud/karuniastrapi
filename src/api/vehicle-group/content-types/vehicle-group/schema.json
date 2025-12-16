@@ -15,12 +15,6 @@
     "name": {
       "type": "string",
       "required": true
-    },
-    "vehicleTypes": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::vehicle-type.vehicle-type",
-      "mappedBy": "group"
     }
   }
 }

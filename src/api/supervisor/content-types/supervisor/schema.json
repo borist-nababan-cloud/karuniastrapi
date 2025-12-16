@@ -7,7 +7,7 @@
     "displayName": "supervisor"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -15,12 +15,6 @@
       "type": "string",
       "required": true,
       "unique": true
-    },
-    "users": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "plugin::users-permissions.user",
-      "mappedBy": "supervisor"
     }
   }
 }

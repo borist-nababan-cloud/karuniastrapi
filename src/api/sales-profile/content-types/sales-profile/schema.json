@@ -1,0 +1,69 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sales_profiles",
+  "info": {
+    "singularName": "sales-profile",
+    "pluralName": "sales-profiles",
+    "displayName": "sales_profile"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sales_uid": {
+      "type": "uid",
+      "required": true
+    },
+    "email": {
+      "type": "email"
+    },
+    "surename": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "province": {
+      "type": "string"
+    },
+    "phonenumber": {
+      "type": "string"
+    },
+    "wanumber": {
+      "type": "string"
+    },
+    "namasupervisor": {
+      "type": "string"
+    },
+    "approved": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "blocked": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "photo_profile": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "location": {
+      "type": "json"
+    },
+    "online_stat": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    }
+  }
+}

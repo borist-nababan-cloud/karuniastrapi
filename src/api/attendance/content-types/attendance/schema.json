@@ -18,26 +18,21 @@
     },
     "type": {
       "type": "enumeration",
+      "required": true,
       "enum": [
         "Check-In",
         "Tracking"
-      ],
-      "required": true
+      ]
     },
     "coordinates": {
       "type": "json",
       "required": true
     },
-    "user": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "attendances"
-    },
     "branch": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::branch.branch"
+      "target": "api::branch.branch",
+      "inversedBy": "attendances"
     }
   }
 }
