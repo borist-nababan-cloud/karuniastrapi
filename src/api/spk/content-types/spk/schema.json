@@ -79,7 +79,7 @@
     },
     "unitInfo": {
       "type": "component",
-      "component": "spk-section.unit",
+      "component": "spk_section.unit",
       "repeatable": false
     },
     "paymentInfo": {

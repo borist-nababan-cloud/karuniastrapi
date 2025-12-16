@@ -1,14 +1,12 @@
-'use strict';
-
 /**
  * spk service
  */
 
-const { createCoreService } = require('@strapi/strapi').factories;
+import { factories } from '@strapi/strapi';
 
-module.exports = createCoreService('api::spk.spk', ({ strapi }) => ({
+export default factories.createCoreService('api::spk.spk', ({ strapi }) => ({
   // Helper function to convert month number to Roman numerals
-  toRoman(num) {
+  toRoman(num: number) {
     const romanNumerals = [
       '', 'I', 'II', 'III', 'IV', 'V', 'VI',
       'VII', 'VIII', 'IX', 'X', 'XI', 'XII'
@@ -52,26 +50,5 @@ module.exports = createCoreService('api::spk.spk', ({ strapi }) => ({
       const timestamp = Date.now();
       return `TMP/SPK/${romanMonth}/${year}/${timestamp}`;
     }
-  },
-
-  // Custom method to create SPK with auto-generated number
-  async createWithAutoNumber(data) {
-    // Ensure noSPK is not provided manually
-    if (data.noSPK) {
-      throw new Error('SPK number is auto-generated. Do not provide noSPK field.');
-    }
-
-    // Generate SPK number
-    const noSPK = await this.generateSPKNumber();
-
-    // Create SPK with generated number
-    const result = await super.create({
-      data: {
-        ...data,
-        noSPK
-      }
-    });
-
-    return result;
   }
 }));

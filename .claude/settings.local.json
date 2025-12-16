@@ -10,7 +10,21 @@
       "Bash(git checkout:*)",
       "Bash(git commit:*)",
       "Bash(npm install:*)",
-      "Bash(npm run set-permissions:*)"
+      "Bash(npm run set-permissions:*)",
+      "Bash(ls:*)",
+      "Bash(node scripts/set-permissions:*)",
+      "Bash(npm run develop)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "WebSearch",
+      "mcp__gitmcp__fetch_generic_documentation",
+      "mcp__gitmcp__search_generic_code",
+      "mcp__gitmcp__search_generic_documentation",
+      "Bash(timeout:*)",
+      "Bash(node:*)",
+      "Bash(wmic process where \"ProcessId=35804\" delete:*)",
+      "Bash(wmic:*)"
     ]
   }
 }

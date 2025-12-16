@@ -536,39 +536,6 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiAttendanceAttendance extends Struct.CollectionTypeSchema {
-  collectionName: 'attendances';
-  info: {
-    description: 'Staff attendance tracking with location';
-    displayName: 'Attendance';
-    pluralName: 'attendances';
-    singularName: 'attendance';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    branch: Schema.Attribute.Relation<'manyToOne', 'api::branch.branch'>;
-    coordinates: Schema.Attribute.JSON & Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::attendance.attendance'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    timestamp: Schema.Attribute.DateTime & Schema.Attribute.Required;
-    type: Schema.Attribute.Enumeration<['Check-In', 'Tracking']> &
-      Schema.Attribute.Required;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   collectionName: 'authors';
   info: {
@@ -614,10 +581,6 @@ export interface ApiBranchBranch extends Struct.CollectionTypeSchema {
   };
   attributes: {
     address: Schema.Attribute.Text;
-    attendances: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::attendance.attendance'
-    >;
     city: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -770,11 +733,57 @@ export interface ApiSalesProfileSalesProfile
     province: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     sales_uid: Schema.Attribute.UID & Schema.Attribute.Required;
+    spks: Schema.Attribute.Relation<'oneToMany', 'api::spk.spk'>;
     surename: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     wanumber: Schema.Attribute.String;
+  };
+}
+
+export interface ApiSpkSpk extends Struct.CollectionTypeSchema {
+  collectionName: 'spks';
+  info: {
+    description: 'Surat Pesanan Kendaraan - Vehicle Order Letter';
+    displayName: 'SPK';
+    pluralName: 'spks';
+    singularName: 'spk';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    alamatCustomer: Schema.Attribute.Text & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    detailInfo: Schema.Attribute.Component<'spk_section.detail', false>;
+    kartuKeluarga: Schema.Attribute.Media<'images' | 'files'>;
+    kota: Schema.Attribute.String;
+    ktpPaspor: Schema.Attribute.Media<'images' | 'files'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::spk.spk'> &
+      Schema.Attribute.Private;
+    namaCustomer: Schema.Attribute.String & Schema.Attribute.Required;
+    namaDebitur: Schema.Attribute.String;
+    noSPK: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    noTeleponCustomer: Schema.Attribute.String & Schema.Attribute.Required;
+    paymentInfo: Schema.Attribute.Component<'spk_section.payment', false>;
+    pekerjaanCustomer: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    salesProfile: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::sales-profile.sales-profile'
+    >;
+    selfie: Schema.Attribute.Media<'images'>;
+    tanggal: Schema.Attribute.Date & Schema.Attribute.Required;
+    unitInfo: Schema.Attribute.Component<'spk_section.unit', false>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1432,13 +1441,13 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
       'api::article.article': ApiArticleArticle;
-      'api::attendance.attendance': ApiAttendanceAttendance;
       'api::author.author': ApiAuthorAuthor;
       'api::branch.branch': ApiBranchBranch;
       'api::category.category': ApiCategoryCategory;
       'api::color.color': ApiColorColor;
       'api::global.global': ApiGlobalGlobal;
       'api::sales-profile.sales-profile': ApiSalesProfileSalesProfile;
+      'api::spk.spk': ApiSpkSpk;
       'api::supervisor.supervisor': ApiSupervisorSupervisor;
       'api::vehicle-group.vehicle-group': ApiVehicleGroupVehicleGroup;
       'api::vehicle-type.vehicle-type': ApiVehicleTypeVehicleType;
