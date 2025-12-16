@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_spk_section_details",
+  "info": {
+    "displayName": "SPK Detail",
+    "icon": "address-card",
+    "description": "SPK BPKB/STNK and customer detail information"
+  },
+  "options": {},
+  "attributes": {
+    "namaBpkbStnk": {
+      "type": "string",
+      "required": true
+    },
+    "alamatStnk": {
+      "type": "text"
+    },
+    "kotaStnkBpkb": {
+      "type": "string"
+    },
+    "emailCustomer": {
+      "type": "email"
+    }
+  }
+}

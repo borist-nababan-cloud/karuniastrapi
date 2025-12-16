@@ -64,6 +64,12 @@
       "type": "boolean",
       "required": true,
       "default": false
+    },
+    "spks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::spk.spk",
+      "mappedBy": "salesProfile"
     }
   }
 }

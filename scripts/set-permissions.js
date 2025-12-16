@@ -30,7 +30,7 @@ async function setPublicPermissions() {
       about: ['find', 'findOne'],
       branch: ['find', 'findOne'],
       supervisor: ['find', 'findOne'],
-      spk: ['find', 'findOne'],
+      spk: ['find', 'findOne', 'create', 'update', 'delete'],
       'vehicle-group': ['find', 'findOne'],
       'vehicle-type': ['find', 'findOne'],
       attendance: ['find', 'findOne'],
@@ -48,7 +48,7 @@ async function setPublicPermissions() {
           });
           console.log(`✅ Created permission: ${controller}.${action}`);
         } catch (error) {
-          console.log(`ℹ️ Permission ${controller}.${action} may already exist`);
+          console.error(`❌ Failed to create permission ${controller}.${action}:`, error.message);
         }
       }
     }

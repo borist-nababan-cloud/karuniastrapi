@@ -1,0 +1,43 @@
+{
+  "collectionName": "components_spk_section_payments",
+  "info": {
+    "displayName": "SPK Payment",
+    "icon": "credit-card",
+    "description": "SPK payment and leasing information"
+  },
+  "options": {},
+  "attributes": {
+    "caraBayar": {
+      "type": "enumeration",
+      "enum": ["TUNAI", "KREDIT"],
+      "required": true,
+      "default": "TUNAI"
+    },
+    "angsuran": {
+      "type": "string"
+    },
+    "tandaJadi": {
+      "type": "decimal"
+    },
+    "tenor": {
+      "type": "string"
+    },
+    "namaLeasing": {
+      "type": "string"
+    },
+    "dp": {
+      "type": "decimal"
+    },
+    "pembelianVia": {
+      "type": "string"
+    },
+    "keterangan": {
+      "type": "text"
+    },
+    "buktiBayar": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images", "files"]
+    }
+  }
+}

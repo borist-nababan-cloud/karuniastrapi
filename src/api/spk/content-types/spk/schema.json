@@ -1,0 +1,91 @@
+{
+  "kind": "collectionType",
+  "collectionName": "spks",
+  "info": {
+    "singularName": "spk",
+    "pluralName": "spks",
+    "displayName": "SPK",
+    "description": "Surat Pesanan Kendaraan - Vehicle Order Letter"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "noSPK": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "tanggal": {
+      "type": "date",
+      "required": true
+    },
+    "pekerjaanCustomer": {
+      "type": "string"
+    },
+    "namaCustomer": {
+      "type": "string",
+      "required": true
+    },
+    "namaDebitur": {
+      "type": "string"
+    },
+    "alamatCustomer": {
+      "type": "text",
+      "required": true
+    },
+    "kota": {
+      "type": "string",
+      "required": false
+    },
+    "noTeleponCustomer": {
+      "type": "string",
+      "required": true
+    },
+    "salesProfile": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::sales-profile.sales-profile",
+      "inversedBy": "spks"
+    },
+    "ktpPaspor": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "kartuKeluarga": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "selfie": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "detailInfo": {
+      "type": "component",
+      "component": "spk_section.detail",
+      "repeatable": false
+    },
+    "unitInfo": {
+      "type": "component",
+      "component": "spk-section.unit",
+      "repeatable": false
+    },
+    "paymentInfo": {
+      "type": "component",
+      "component": "spk_section.payment",
+      "repeatable": false
+    }
+  }
+}

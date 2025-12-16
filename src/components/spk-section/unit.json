@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_spk_section_units",
+  "info": {
+    "displayName": "SPK Unit",
+    "icon": "car",
+    "description": "SPK vehicle unit information"
+  },
+  "options": {},
+  "attributes": {
+    "vehicleType": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::vehicle-type.vehicle-type"
+    },
+    "noRangka": {
+      "type": "string",
+      "required": false
+    },
+    "warna": {
+      "type": "string",
+      "required": false
+    },
+    "noMesin": {
+      "type": "string",
+      "required": false
+    },
+    "tahun": {
+      "type": "string"
+    },
+    "lainLain": {
+      "type": "text"
+    },
+    "hargaOtr": {
+      "type": "decimal"
+    },
+    "bonus": {
+      "type": "text"
+    }
+  }
+}
