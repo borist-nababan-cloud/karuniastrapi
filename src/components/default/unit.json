@@ -16,10 +16,6 @@
       "type": "string",
       "required": false
     },
-    "warna": {
-      "type": "string",
-      "required": false
-    },
     "noMesin": {
       "type": "string",
       "required": false
@@ -35,6 +31,11 @@
     },
     "bonus": {
       "type": "text"
+    },
+    "color": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::color.color"
     }
   }
 }

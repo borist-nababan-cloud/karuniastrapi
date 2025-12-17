@@ -639,7 +639,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
 export interface ApiColorColor extends Struct.CollectionTypeSchema {
   collectionName: 'colors';
   info: {
-    displayName: 'color';
+    displayName: 'Colors';
     pluralName: 'colors';
     singularName: 'color';
   };
@@ -780,7 +780,7 @@ export interface ApiSpkSpk extends Struct.CollectionTypeSchema {
     >;
     selfie: Schema.Attribute.Media<'images'>;
     tanggal: Schema.Attribute.Date & Schema.Attribute.Required;
-    unitInfo: Schema.Attribute.Component<'spk_section.unit', false>;
+    unitInfo: Schema.Attribute.Component<'default.unit', false>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

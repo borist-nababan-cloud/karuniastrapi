@@ -1,5 +1,27 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface DefaultUnit extends Struct.ComponentSchema {
+  collectionName: 'components_spk_section_units';
+  info: {
+    description: 'SPK vehicle unit information';
+    displayName: 'SPK Unit';
+    icon: 'car';
+  };
+  attributes: {
+    bonus: Schema.Attribute.Text;
+    color: Schema.Attribute.Relation<'oneToOne', 'api::color.color'>;
+    hargaOtr: Schema.Attribute.Decimal;
+    lainLain: Schema.Attribute.Text;
+    noMesin: Schema.Attribute.String;
+    noRangka: Schema.Attribute.String;
+    tahun: Schema.Attribute.String;
+    vehicleType: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::vehicle-type.vehicle-type'
+    >;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -99,31 +121,10 @@ export interface SpkSectionPayment extends Struct.ComponentSchema {
   };
 }
 
-export interface SpkSectionUnit extends Struct.ComponentSchema {
-  collectionName: 'components_spk_section_units';
-  info: {
-    description: 'SPK vehicle unit information';
-    displayName: 'SPK Unit';
-    icon: 'car';
-  };
-  attributes: {
-    bonus: Schema.Attribute.Text;
-    hargaOtr: Schema.Attribute.Decimal;
-    lainLain: Schema.Attribute.Text;
-    noMesin: Schema.Attribute.String;
-    noRangka: Schema.Attribute.String;
-    tahun: Schema.Attribute.String;
-    vehicleType: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::vehicle-type.vehicle-type'
-    >;
-    warna: Schema.Attribute.String;
-  };
-}
-
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'default.unit': DefaultUnit;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;
@@ -131,7 +132,6 @@ declare module '@strapi/strapi' {
       'shared.slider': SharedSlider;
       'spk_section.detail': SpkSectionDetail;
       'spk_section.payment': SpkSectionPayment;
-      'spk_section.unit': SpkSectionUnit;
     }
   }
 }

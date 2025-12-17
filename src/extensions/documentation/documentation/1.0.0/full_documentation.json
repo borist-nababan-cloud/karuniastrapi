@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-12-16T14:34:00.510Z"
+    "x-generation-date": "2025-12-16T16:00:49.660Z"
   },
   "servers": [
     {
@@ -8061,7 +8061,7 @@
                   "$ref": "#/components/schemas/SpkSectionDetailComponent"
                 },
                 "unitInfo": {
-                  "$ref": "#/components/schemas/SpkSectionUnitComponent"
+                  "$ref": "#/components/schemas/DefaultUnitComponent"
                 },
                 "paymentInfo": {
                   "$ref": "#/components/schemas/SpkSectionPaymentComponent"
@@ -8205,7 +8205,7 @@
           }
         }
       },
-      "SpkSectionUnitComponent": {
+      "DefaultUnitComponent": {
         "type": "object",
         "properties": {
           "id": {
@@ -8225,9 +8225,6 @@
           "noRangka": {
             "type": "string"
           },
-          "warna": {
-            "type": "string"
-          },
           "noMesin": {
             "type": "string"
           },
@@ -8243,6 +8240,17 @@
           },
           "bonus": {
             "type": "string"
+          },
+          "color": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -8505,7 +8513,7 @@
                 "$ref": "#/components/schemas/SpkSectionDetailComponent"
               },
               "unitInfo": {
-                "$ref": "#/components/schemas/SpkSectionUnitComponent"
+                "$ref": "#/components/schemas/DefaultUnitComponent"
               },
               "paymentInfo": {
                 "$ref": "#/components/schemas/SpkSectionPaymentComponent"
@@ -9690,7 +9698,7 @@
                       "$ref": "#/components/schemas/SpkSectionDetailComponent"
                     },
                     "unitInfo": {
-                      "$ref": "#/components/schemas/SpkSectionUnitComponent"
+                      "$ref": "#/components/schemas/DefaultUnitComponent"
                     },
                     "paymentInfo": {
                       "$ref": "#/components/schemas/SpkSectionPaymentComponent"
@@ -10193,7 +10201,7 @@
             "$ref": "#/components/schemas/SpkSectionDetailComponent"
           },
           "unitInfo": {
-            "$ref": "#/components/schemas/SpkSectionUnitComponent"
+            "$ref": "#/components/schemas/DefaultUnitComponent"
           },
           "paymentInfo": {
             "$ref": "#/components/schemas/SpkSectionPaymentComponent"
