@@ -1,76 +1,47 @@
-# Use Node 20 Alpine for smaller image size
-FROM node:20-alpine3.18 AS base
+# -----------------------------------------------------------------------------
+# BASE IMAGE
+# -----------------------------------------------------------------------------
+FROM node:18-alpine as builder
 
-# Install system dependencies for Strapi
-# libvips-dev is required for sharp (image processing)
-RUN apk update && \
-    apk add --no-cache \
-    build-base \
-    gcc \
-    autoconf \
-    automake \
-    zlib-dev \
-    libpng-dev \
-    nasm \
-    bash \
-    vips-dev \
-    git
+# Install dependencies required for sharp and other native modules
+RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev
 
-# Set working directory
 WORKDIR /app
 
-# --- Build Stage ---
-FROM base AS builder
+# Copy package files and install dependencies
+COPY package.json package-lock.json* ./
+RUN npm ci
 
-# Copy package files
-COPY package*.json ./
-
-# Install dependencies
-# Using --production=false to include devDependencies needed for build
-RUN npm ci --production=false
-
-# Copy source code
+# Copy the rest of the application source
 COPY . .
 
-# Build admin panel
+# Build the admin panel and backend (creates /app/dist)
 ENV NODE_ENV=production
 RUN npm run build
 
-# Remove development dependencies after build
-RUN npm prune --production
+# -----------------------------------------------------------------------------
+# PRODUCTION IMAGE
+# -----------------------------------------------------------------------------
+FROM node:18-alpine
 
-# --- Production Stage ---
-FROM base AS production
-
-# Set to production
-ENV NODE_ENV=production
+# Install runtime dependencies for sharp
+RUN apk update && apk add --no-cache vips-dev
 
 WORKDIR /app
 
-# Copy built application from builder
+ENV NODE_ENV=production
+
+# Copy built artifacts from the builder stage
+# We ONLY copy dist (backend), public (assets), node_modules, and package files.
+# We DO NOT copy 'build' because it doesn't exist in Strapi v4/v5.
+
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/build ./build
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/config ./config
-COPY --from=builder /app/database ./database
-COPY --from=builder /app/src ./src
-COPY --from=builder /app/favicon.png ./
 
-# Create directories for uploads and temp data
-RUN mkdir -p /app/public/uploads /app/.tmp && \
-    chown -R node:node /app
-
-# Switch to non-root user for security
-USER node
-
-# Expose Strapi port
+# Expose the Strapi port
 EXPOSE 1337
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:1337/_health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
-
-# Start Strapi
+# Start the application
 CMD ["npm", "run", "start"]
