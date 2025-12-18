@@ -15,7 +15,7 @@ RUN npm ci
 # Copy the rest of the application source
 COPY . .
 
-# Build the admin panel and backend (creates /app/dist)
+# Build the admin panel and backend
 ENV NODE_ENV=production
 RUN npm run build
 
@@ -31,12 +31,10 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
-# Copy built artifacts from the builder stage
-# We ONLY copy dist (backend), public (assets), node_modules, and package files.
-# We DO NOT copy 'build' because it doesn't exist in Strapi v4/v5.
-
+# Copy built artifacts and ESSENTIAL CONFIGURATION
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/config ./config
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package*.json ./
 
