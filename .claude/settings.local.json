@@ -24,7 +24,9 @@
       "Bash(timeout:*)",
       "Bash(node:*)",
       "Bash(wmic process where \"ProcessId=35804\" delete:*)",
-      "Bash(wmic:*)"
+      "Bash(wmic:*)",
+      "Bash(git remote remove:*)",
+      "Bash(git push:*)"
     ]
   }
 }

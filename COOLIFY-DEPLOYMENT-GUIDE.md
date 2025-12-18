@@ -71,7 +71,7 @@ Minimum specifications for Coolify + Strapi:
 ### 3. **Local Development Setup**
 
 - Git installed and repository access
-- GitLab account (for Git-based deployments)
+- GitHub account (for Git-based deployments)
 - SSH access to your VPS
 - Basic understanding of Docker concepts
 
@@ -129,7 +129,7 @@ You have two main deployment methods for this Strapi application:
 - Requires Docker knowledge
 - More initial setup
 
-### Option 2: Nixpacks with GitLab
+### Option 2: Nixpacks with GitHub
 
 **Best for:**
 - Quick deployments
@@ -334,7 +334,6 @@ WORKDIR /app
 # Copy built application from builder
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/build ./build
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/config ./config
@@ -362,27 +361,27 @@ CMD ["npm", "run", "start"]
 
 ### Step 5: Configure Git Repository Access in Coolify
 
-#### Option A: Using GitLab Integration (Recommended)
+#### Option A: Using GitHub Integration (Recommended)
 
 1. **In Coolify Dashboard** → Go to **Settings** → **Sources**
-2. **Click "Add Source"** → Select **"GitLab"**
-3. **Follow OAuth flow** to authorize Coolify with GitLab
+2. **Click "Add Source"** → Select **"GitHub"**
+3. **Follow OAuth flow** to authorize Coolify with GitHub
 4. **Select repositories** you want to grant access to
 
 #### Option B: Using Deploy Key
 
 1. **In Coolify Dashboard** → Go to **Settings** → **Keys**
 2. **Generate SSH Key** → Copy the public key
-3. **In GitLab** → Go to your repository → **Settings** → **Repository** → **Deploy Keys**
+3. **In GitHub** → Go to your repository → **Settings** → **Deploy keys**
 4. **Add Deploy Key** → Paste public key, grant read access
-5. **In Coolify** → Add repository URL with SSH format (git@gitlab.com:username/repo.git)
+5. **In Coolify** → Add repository URL with SSH format (git@github.com:boristel/karuniabackendstrapi.git)
 
 ### Step 6: Deploy Application
 
 1. **In Your Project** → Click **"+ New Resource"**
 2. **Select "Application"** → Choose **"Docker Compose"**
 3. **Configure Repository**:
-   - **Repository URL**: Your GitLab repository URL (e.g., https://gitlab.com/karuniamotor/karunia-backend.git)
+   - **Repository URL**: Your GitHub repository URL (e.g., https://github.com/boristel/karuniabackendstrapi.git)
    - **Branch**: `main` (or your deployment branch)
    - **Docker Compose Location**: `docker-compose.prod.yml`
    - **Build Pack**: Docker Compose
@@ -420,20 +419,28 @@ TRANSFER_TOKEN_SALT=your-unique-transfer-token-salt
 JWT_SECRET=your-unique-jwt-secret
 ENCRYPTION_KEY=your-unique-encryption-key
 
-# Database Configuration
+# Database Configuration (using existing Coolify PostgreSQL)
 DATABASE_CLIENT=postgres
-DATABASE_HOST=postgres
+DATABASE_HOST=y8ooo0c80so04g08gswgo40c
 DATABASE_PORT=5432
-DATABASE_NAME=karunia_motor
-DATABASE_USERNAME=strapi_user
-DATABASE_PASSWORD=your-secure-database-password
+DATABASE_NAME=karuniamotor
+DATABASE_USERNAME=postgres
+DATABASE_PASSWORD=9PooM71nbMsWOmaBbR3MXeFqaautgWVO47DzUDHuUioZE1pBO2KyzUCWDCa40ci3
 DATABASE_SSL=false
 DATABASE_SCHEMA=public
+# Full database connection URL (optional but recommended)
+DATABASE_URL=postgres://postgres:9PooM71nbMsWOmaBbR3MXeFqaautgWVO47DzUDHuUioZE1pBO2KyzUCWDCa40ci3@y8ooo0c80so04g08gswgo40c:5432/karuniamotor
+
+# Application URLs
+URL=https://api.karuniamotor.com
+PUBLIC_URL=https://api.karuniamotor.com
 
 # Optional: CORS Configuration
 # Add your frontend domains here
 # FRONTEND_URL=https://karuniamotor.com
 ```
+
+**Note**: The database credentials above are for your existing internal Coolify PostgreSQL database. Make sure the database container is running before deploying the Strapi application.
 
 **Generate Secure Random Keys**:
 
@@ -475,7 +482,7 @@ Once deployed successfully:
 
 ---
 
-## Method 2: Deploy Using GitLab Repository with Nixpacks
+## Method 2: Deploy Using GitHub Repository with Nixpacks
 
 This method uses Coolify's automatic build detection (Nixpacks) for simpler deployments.
 
@@ -487,34 +494,27 @@ Follow **Method 1, Step 1** to install Coolify on your VPS.
 
 Follow **Method 1, Step 2** to create a project in Coolify.
 
-### Step 3: Deploy PostgreSQL Database First
+### Step 3: Use Existing PostgreSQL Database
 
-1. **In Your Project** → Click **"+ New Resource"**
-2. **Select "Database"** → Choose **"PostgreSQL"**
-3. **Configure Database**:
-   - **Name**: `karunia-postgres`
-   - **Version**: `15` (or latest stable)
-   - **Database Name**: `karunia_motor`
-   - **Username**: `strapi_user`
-   - **Password**: Generate secure password
-   - **Port**: `5432` (internal), `5433` (external, if needed)
-   - **Persistent Storage**: Enabled
-4. **Click "Create"**
-5. **Wait for Database**: Wait until status shows "Running"
-6. **Note Connection Details**: You'll need these for Strapi
+Since you already have an internal PostgreSQL database in Coolify, you don't need to create a new one.
 
-**Important**: Copy the **Internal Connection String** for use in Strapi:
-```
-postgres://strapi_user:password@postgres:5432/karunia_motor
-```
+**Use your existing database credentials**:
+- **Database Host**: `y8ooo0c80so04g08gswgo40c`
+- **Database Port**: `5432`
+- **Database Name**: `karuniamotor`
+- **Username**: `postgres`
+- **Password**: `9PooM71nbMsWOmaBbR3MXeFqaautgWVO47DzUDHuUioZE1pBO2KyzUCWDCa40ci3`
+- **Connection URL**: `postgres://postgres:9PooM71nbMsWOmaBbR3MXeFqaautgWVO47DzUDHuUioZE1pBO2KyzUCWDCa40ci3@y8ooo0c80so04g08gswgo40c:5432/karuniamotor`
+
+**Note**: Make sure your existing PostgreSQL database is running and accessible before proceeding with Strapi deployment.
 
 ### Step 4: Deploy Strapi Application
 
 1. **In Your Project** → Click **"+ New Resource"**
 2. **Select "Application"** → Choose **"Git Repository"**
 3. **Configure Repository**:
-   - **Source**: GitLab (connect via OAuth or Deploy Key)
-   - **Repository**: Select your repository (karuniamotor/karunia-backend)
+   - **Source**: GitHub (connect via OAuth or Deploy Key)
+   - **Repository**: Select your repository (boristel/karuniabackendstrapi)
    - **Branch**: `main`
    - **Build Pack**: Nixpacks (auto-detected)
 
@@ -531,16 +531,18 @@ postgres://strapi_user:password@postgres:5432/karunia_motor
 
 ### Step 5: Configure Environment Variables
 
-Same as **Method 1, Step 7**, but update `DATABASE_HOST`:
+Same as **Method 1, Step 7**, use your existing database credentials:
 
 ```env
-# Use the internal hostname of your PostgreSQL database
-# Format: {database-resource-name} (without port)
-DATABASE_HOST=karunia-postgres
+# Database Configuration (using existing Coolify PostgreSQL)
+DATABASE_CLIENT=postgres
+DATABASE_HOST=y8ooo0c80so04g08gswgo40c
 DATABASE_PORT=5432
-DATABASE_NAME=karunia_motor
-DATABASE_USERNAME=strapi_user
-DATABASE_PASSWORD=your-database-password
+DATABASE_NAME=karuniamotor
+DATABASE_USERNAME=postgres
+DATABASE_PASSWORD=9PooM71nbMsWOmaBbR3MXeFqaautgWVO47DzUDHuUioZE1pBO2KyzUCWDCa40ci3
+DATABASE_SSL=false
+DATABASE_SCHEMA=public
 ```
 
 ### Step 6: Configure Persistent Storage
