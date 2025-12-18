@@ -28,20 +28,23 @@
       "type": "string",
       "required": true
     },
-    "namaDebitur": {
-      "type": "string"
+    "emailcustomer": {
+      "type": "email"
     },
     "alamatCustomer": {
       "type": "text",
       "required": true
     },
-    "kota": {
-      "type": "string",
-      "required": false
-    },
     "noTeleponCustomer": {
       "type": "string",
       "required": true
+    },
+    "kotacustomer": {
+      "type": "string",
+      "required": false
+    },
+    "namaDebitur": {
+      "type": "string"
     },
     "salesProfile": {
       "type": "relation",
@@ -72,9 +75,19 @@
         "images"
       ]
     },
+    "editable": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "finish": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
     "detailInfo": {
       "type": "component",
-      "component": "spk_section.detail",
+      "component": "spk-section.detail",
       "repeatable": false
     },
     "unitInfo": {
@@ -84,7 +97,7 @@
     },
     "paymentInfo": {
       "type": "component",
-      "component": "spk_section.payment",
+      "component": "spk-section.payment",
       "repeatable": false
     }
   }

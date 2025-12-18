@@ -34,6 +34,7 @@ async function setPublicPermissions() {
       'vehicle-group': ['find', 'findOne'],
       'vehicle-type': ['find', 'findOne'],
       attendance: ['find', 'findOne'],
+      color: ['find', 'findOne'],
     };
 
     // Create the new permissions and link them to the public role

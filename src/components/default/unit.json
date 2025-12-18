@@ -17,8 +17,7 @@
       "required": false
     },
     "noMesin": {
-      "type": "string",
-      "required": false
+      "type": "string"
     },
     "tahun": {
       "type": "string"

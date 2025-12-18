@@ -758,9 +758,16 @@ export interface ApiSpkSpk extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    detailInfo: Schema.Attribute.Component<'spk_section.detail', false>;
+    detailInfo: Schema.Attribute.Component<'spk-section.detail', false>;
+    editable: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    emailcustomer: Schema.Attribute.Email;
+    finish: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
     kartuKeluarga: Schema.Attribute.Media<'images' | 'files'>;
-    kota: Schema.Attribute.String;
+    kotacustomer: Schema.Attribute.String;
     ktpPaspor: Schema.Attribute.Media<'images' | 'files'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::spk.spk'> &
@@ -771,7 +778,7 @@ export interface ApiSpkSpk extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     noTeleponCustomer: Schema.Attribute.String & Schema.Attribute.Required;
-    paymentInfo: Schema.Attribute.Component<'spk_section.payment', false>;
+    paymentInfo: Schema.Attribute.Component<'spk-section.payment', false>;
     pekerjaanCustomer: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     salesProfile: Schema.Attribute.Relation<

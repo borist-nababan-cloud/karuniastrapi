@@ -10,7 +10,7 @@ module.exports = {
     if (!event.params.data.noSPK) {
       const spkNumber = await spkService.generateSPKNumber();
       event.params.data.noSPK = spkNumber;
-      console.log('Generated SPK number:', spkNumber);
+
     }
   },
 
@@ -18,7 +18,7 @@ module.exports = {
   afterCreate: async (event) => {
     // Log successful creation
     if (event.result && event.result.noSPK) {
-      console.log('SPK created with number:', event.result.noSPK);
+
     }
   },
 
@@ -37,21 +37,21 @@ module.exports = {
   afterUpdate: async (event) => {
     // Log successful update
     if (event.result && event.result.noSPK) {
-      console.log('SPK updated:', event.result.noSPK);
+
     }
   },
 
   // Lifecycle hook before deleting an SPK
   beforeDelete: async (event) => {
     // Add any pre-deletion logic if needed
-    console.log('About to delete SPK:', event.result?.noSPK);
+
   },
 
   // Lifecycle hook after deleting an SPK
   afterDelete: async (event) => {
     // Log deletion
     if (event.result && event.result.noSPK) {
-      console.log('SPK deleted:', event.result.noSPK);
+
     }
   }
 };

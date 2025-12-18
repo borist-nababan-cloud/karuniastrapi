@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-12-16T16:00:49.660Z"
+    "x-generation-date": "2025-12-18T08:07:25.707Z"
   },
   "servers": [
     {
@@ -7415,16 +7415,20 @@
                 "namaCustomer": {
                   "type": "string"
                 },
-                "namaDebitur": {
-                  "type": "string"
+                "emailcustomer": {
+                  "type": "string",
+                  "format": "email"
                 },
                 "alamatCustomer": {
                   "type": "string"
                 },
-                "kota": {
+                "noTeleponCustomer": {
                   "type": "string"
                 },
-                "noTeleponCustomer": {
+                "kotacustomer": {
+                  "type": "string"
+                },
+                "namaDebitur": {
                   "type": "string"
                 },
                 "salesProfile": {
@@ -8057,6 +8061,12 @@
                     }
                   }
                 },
+                "editable": {
+                  "type": "boolean"
+                },
+                "finish": {
+                  "type": "boolean"
+                },
                 "detailInfo": {
                   "$ref": "#/components/schemas/SpkSectionDetailComponent"
                 },
@@ -8193,15 +8203,11 @@
           "namaBpkbStnk": {
             "type": "string"
           },
-          "alamatStnk": {
+          "alamatBpkbStnk": {
             "type": "string"
           },
           "kotaStnkBpkb": {
             "type": "string"
-          },
-          "emailCustomer": {
-            "type": "string",
-            "format": "email"
           }
         }
       },
@@ -8268,7 +8274,8 @@
             ]
           },
           "angsuran": {
-            "type": "string"
+            "type": "number",
+            "format": "float"
           },
           "tandaJadi": {
             "type": "number",
@@ -8436,7 +8443,9 @@
               "tanggal",
               "namaCustomer",
               "alamatCustomer",
-              "noTeleponCustomer"
+              "noTeleponCustomer",
+              "editable",
+              "finish"
             ],
             "type": "object",
             "properties": {
@@ -8453,16 +8462,20 @@
               "namaCustomer": {
                 "type": "string"
               },
-              "namaDebitur": {
-                "type": "string"
+              "emailcustomer": {
+                "type": "string",
+                "format": "email"
               },
               "alamatCustomer": {
                 "type": "string"
               },
-              "kota": {
+              "noTeleponCustomer": {
                 "type": "string"
               },
-              "noTeleponCustomer": {
+              "kotacustomer": {
+                "type": "string"
+              },
+              "namaDebitur": {
                 "type": "string"
               },
               "salesProfile": {
@@ -8508,6 +8521,12 @@
                   }
                 ],
                 "example": "string or id"
+              },
+              "editable": {
+                "type": "boolean"
+              },
+              "finish": {
+                "type": "boolean"
               },
               "detailInfo": {
                 "$ref": "#/components/schemas/SpkSectionDetailComponent"
@@ -8581,7 +8600,9 @@
           "tanggal",
           "namaCustomer",
           "alamatCustomer",
-          "noTeleponCustomer"
+          "noTeleponCustomer",
+          "editable",
+          "finish"
         ],
         "properties": {
           "id": {
@@ -8603,16 +8624,20 @@
           "namaCustomer": {
             "type": "string"
           },
-          "namaDebitur": {
-            "type": "string"
+          "emailcustomer": {
+            "type": "string",
+            "format": "email"
           },
           "alamatCustomer": {
             "type": "string"
           },
-          "kota": {
+          "noTeleponCustomer": {
             "type": "string"
           },
-          "noTeleponCustomer": {
+          "kotacustomer": {
+            "type": "string"
+          },
+          "namaDebitur": {
             "type": "string"
           },
           "salesProfile": {
@@ -9284,16 +9309,20 @@
                     "namaCustomer": {
                       "type": "string"
                     },
-                    "namaDebitur": {
-                      "type": "string"
+                    "emailcustomer": {
+                      "type": "string",
+                      "format": "email"
                     },
                     "alamatCustomer": {
                       "type": "string"
                     },
-                    "kota": {
+                    "noTeleponCustomer": {
                       "type": "string"
                     },
-                    "noTeleponCustomer": {
+                    "kotacustomer": {
+                      "type": "string"
+                    },
+                    "namaDebitur": {
                       "type": "string"
                     },
                     "salesProfile": {
@@ -9693,6 +9722,12 @@
                           }
                         }
                       }
+                    },
+                    "editable": {
+                      "type": "boolean"
+                    },
+                    "finish": {
+                      "type": "boolean"
                     },
                     "detailInfo": {
                       "$ref": "#/components/schemas/SpkSectionDetailComponent"
@@ -10196,6 +10231,12 @@
                 }
               }
             }
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "finish": {
+            "type": "boolean"
           },
           "detailInfo": {
             "$ref": "#/components/schemas/SpkSectionDetailComponent"

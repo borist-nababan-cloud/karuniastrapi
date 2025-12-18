@@ -9,16 +9,13 @@
   "attributes": {
     "namaBpkbStnk": {
       "type": "string",
-      "required": true
+      "required": false
     },
-    "alamatStnk": {
+    "alamatBpkbStnk": {
       "type": "text"
     },
     "kotaStnkBpkb": {
       "type": "string"
-    },
-    "emailCustomer": {
-      "type": "email"
     }
   }
 }

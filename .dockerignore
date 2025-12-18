@@ -1,0 +1,80 @@
+# Dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build outputs
+dist/
+build/
+.cache/
+
+# Environment files
+.env
+.env.*
+!.env.example
+!.env.production.example
+
+# Development files
+.tmp/
+*.log
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation (no need in container)
+*.md
+!README.md
+docs/
+md-files/
+
+# Test files
+*.test.js
+*.test.ts
+*.spec.js
+*.spec.ts
+test/
+tests/
+__tests__/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Coolify/Letta
+.letta/
+.claude/
+.serena/
+
+# Database
+*.db
+*.sqlite
+database/migrations/
+
+# Uploads (will be mounted as volume)
+public/uploads/*
+
+# Scripts (usually not needed in container)
+scripts/
+reset-postgres-manual.sql
+
+# Backup files
+*.sql
+*.tar.gz
+*.zip
+
+# Response files
+spk_response*.json

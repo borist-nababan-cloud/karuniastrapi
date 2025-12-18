@@ -9,12 +9,15 @@
   "attributes": {
     "caraBayar": {
       "type": "enumeration",
-      "enum": ["TUNAI", "KREDIT"],
-      "required": true,
-      "default": "TUNAI"
+      "required": false,
+      "default": "TUNAI",
+      "enum": [
+        "TUNAI",
+        "KREDIT"
+      ]
     },
     "angsuran": {
-      "type": "string"
+      "type": "decimal"
     },
     "tandaJadi": {
       "type": "decimal"
@@ -37,7 +40,10 @@
     "buktiBayar": {
       "type": "media",
       "multiple": true,
-      "allowedTypes": ["images", "files"]
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
     }
   }
 }

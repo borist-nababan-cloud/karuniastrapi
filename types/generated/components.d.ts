@@ -92,10 +92,9 @@ export interface SpkSectionDetail extends Struct.ComponentSchema {
     icon: 'address-card';
   };
   attributes: {
-    alamatStnk: Schema.Attribute.Text;
-    emailCustomer: Schema.Attribute.Email;
+    alamatBpkbStnk: Schema.Attribute.Text;
     kotaStnkBpkb: Schema.Attribute.String;
-    namaBpkbStnk: Schema.Attribute.String & Schema.Attribute.Required;
+    namaBpkbStnk: Schema.Attribute.String;
   };
 }
 
@@ -107,10 +106,9 @@ export interface SpkSectionPayment extends Struct.ComponentSchema {
     icon: 'credit-card';
   };
   attributes: {
-    angsuran: Schema.Attribute.String;
+    angsuran: Schema.Attribute.Decimal;
     buktiBayar: Schema.Attribute.Media<'images' | 'files', true>;
     caraBayar: Schema.Attribute.Enumeration<['TUNAI', 'KREDIT']> &
-      Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'TUNAI'>;
     dp: Schema.Attribute.Decimal;
     keterangan: Schema.Attribute.Text;
@@ -130,8 +128,8 @@ declare module '@strapi/strapi' {
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
       'shared.slider': SharedSlider;
-      'spk_section.detail': SpkSectionDetail;
-      'spk_section.payment': SpkSectionPayment;
+      'spk-section.detail': SpkSectionDetail;
+      'spk-section.payment': SpkSectionPayment;
     }
   }
 }
