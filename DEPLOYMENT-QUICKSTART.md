@@ -45,7 +45,7 @@ curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash
 1. In Project → **"+ New Resource"** → **"Application"**
 2. Select **"Docker Compose"**
 3. Configure:
-   - **Repository**: Your GitHub repo
+   - **Repository**: Your GitLab repo (gitlab.com/karuniamotor/karunia-backend)
    - **Branch**: `main`
    - **Docker Compose Location**: `docker-compose.prod.yml`
 4. **Important**: Enable **"Preserve Repository Code"**

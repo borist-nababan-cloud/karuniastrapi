@@ -15,7 +15,7 @@ Node Version: >=20.0.0
 3. [Understanding Coolify](#understanding-coolify)
 4. [Deployment Options](#deployment-options)
 5. [Method 1: Deploy Using Docker Compose (Recommended)](#method-1-deploy-using-docker-compose-recommended)
-6. [Method 2: Deploy Using GitHub Repository with Nixpacks](#method-2-deploy-using-github-repository-with-nixpacks)
+6. [Method 2: Deploy Using GitLab Repository with Nixpacks](#method-2-deploy-using-gitlab-repository-with-nixpacks)
 7. [Database Configuration](#database-configuration)
 8. [Environment Variables Setup](#environment-variables-setup)
 9. [File Uploads & Persistent Storage](#file-uploads--persistent-storage)
@@ -71,7 +71,7 @@ Minimum specifications for Coolify + Strapi:
 ### 3. **Local Development Setup**
 
 - Git installed and repository access
-- GitHub/GitLab account (for Git-based deployments)
+- GitLab account (for Git-based deployments)
 - SSH access to your VPS
 - Basic understanding of Docker concepts
 
@@ -129,7 +129,7 @@ You have two main deployment methods for this Strapi application:
 - Requires Docker knowledge
 - More initial setup
 
-### Option 2: Nixpacks with GitHub
+### Option 2: Nixpacks with GitLab
 
 **Best for:**
 - Quick deployments
@@ -362,27 +362,27 @@ CMD ["npm", "run", "start"]
 
 ### Step 5: Configure Git Repository Access in Coolify
 
-#### Option A: Using GitHub App (Recommended)
+#### Option A: Using GitLab Integration (Recommended)
 
 1. **In Coolify Dashboard** → Go to **Settings** → **Sources**
-2. **Click "Add Source"** → Select **"GitHub App"**
-3. **Follow OAuth flow** to authorize Coolify with GitHub
+2. **Click "Add Source"** → Select **"GitLab"**
+3. **Follow OAuth flow** to authorize Coolify with GitLab
 4. **Select repositories** you want to grant access to
 
 #### Option B: Using Deploy Key
 
 1. **In Coolify Dashboard** → Go to **Settings** → **Keys**
 2. **Generate SSH Key** → Copy the public key
-3. **In GitHub** → Go to your repository → **Settings** → **Deploy Keys**
+3. **In GitLab** → Go to your repository → **Settings** → **Repository** → **Deploy Keys**
 4. **Add Deploy Key** → Paste public key, grant read access
-5. **In Coolify** → Add repository URL with SSH format
+5. **In Coolify** → Add repository URL with SSH format (git@gitlab.com:username/repo.git)
 
 ### Step 6: Deploy Application
 
 1. **In Your Project** → Click **"+ New Resource"**
 2. **Select "Application"** → Choose **"Docker Compose"**
 3. **Configure Repository**:
-   - **Repository URL**: Your GitHub repository URL
+   - **Repository URL**: Your GitLab repository URL (e.g., https://gitlab.com/karuniamotor/karunia-backend.git)
    - **Branch**: `main` (or your deployment branch)
    - **Docker Compose Location**: `docker-compose.prod.yml`
    - **Build Pack**: Docker Compose
@@ -475,7 +475,7 @@ Once deployed successfully:
 
 ---
 
-## Method 2: Deploy Using GitHub Repository with Nixpacks
+## Method 2: Deploy Using GitLab Repository with Nixpacks
 
 This method uses Coolify's automatic build detection (Nixpacks) for simpler deployments.
 
@@ -513,8 +513,8 @@ postgres://strapi_user:password@postgres:5432/karunia_motor
 1. **In Your Project** → Click **"+ New Resource"**
 2. **Select "Application"** → Choose **"Git Repository"**
 3. **Configure Repository**:
-   - **Source**: GitHub (connect via OAuth or Deploy Key)
-   - **Repository**: Select your repository
+   - **Source**: GitLab (connect via OAuth or Deploy Key)
+   - **Repository**: Select your repository (karuniamotor/karunia-backend)
    - **Branch**: `main`
    - **Build Pack**: Nixpacks (auto-detected)
 
