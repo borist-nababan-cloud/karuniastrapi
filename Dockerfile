@@ -1,45 +1,23 @@
-# -----------------------------------------------------------------------------
-# BASE IMAGE
-# -----------------------------------------------------------------------------
-FROM node:18-alpine as builder
+FROM node:18-alpine
 
-# Install dependencies required for sharp and other native modules
+# 1. Install system dependencies required for Strapi/Sharp
 RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev
 
-WORKDIR /app
+# 2. Set the working directory to the standard Strapi path
+WORKDIR /opt/app
 
-# Copy package files and install dependencies
+# 3. Install Node dependencies
 COPY package.json package-lock.json* ./
 RUN npm ci
 
-# Copy the rest of the application source
+# 4. Copy the entire project source
 COPY . .
 
-# Build the admin panel and backend
+# 5. Build the Strapi admin panel and backend
+# This generates the 'dist' folder containing the compiled JS config
 ENV NODE_ENV=production
 RUN npm run build
 
-# -----------------------------------------------------------------------------
-# PRODUCTION IMAGE
-# -----------------------------------------------------------------------------
-FROM node:18-alpine
-
-# Install runtime dependencies for sharp
-RUN apk update && apk add --no-cache vips-dev
-
-WORKDIR /app
-
-ENV NODE_ENV=production
-
-# Copy built artifacts and ESSENTIAL CONFIGURATION
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/config ./config
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package*.json ./
-
-# Expose the Strapi port
+# 6. Expose the port and start the app
 EXPOSE 1337
-
-# Start the application
 CMD ["npm", "run", "start"]
