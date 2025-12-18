@@ -9,9 +9,21 @@ services:
     container_name: karunia-strapi
     restart: unless-stopped
     env_file: .env
+    
+    # --- CHANGE START ---
+    # 1. Add this EXPOSE section so Coolify knows where to send traffic
+    expose:
+      - "1337"
+    
+    # 2. REMOVE or comment out 'ports' to avoid "Port already in use" errors on the host
+    # ports:
+    #   - "1337:1337"
+    # --- CHANGE END ---
+
     environment:
       NODE_ENV: production
       DATABASE_CLIENT: postgres
+      # ... rest of your variables ...
       DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_PORT: ${DATABASE_PORT}
       DATABASE_NAME: ${DATABASE_NAME}
@@ -29,8 +41,6 @@ services:
     volumes:
       - strapi-uploads:/app/public/uploads
       - strapi-data:/app/.tmp
-    ports:
-      - "1337:1337"
     networks:
       - karunia-network
     healthcheck:
