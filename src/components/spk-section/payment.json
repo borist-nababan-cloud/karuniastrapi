@@ -22,9 +22,6 @@
     "tandaJadi": {
       "type": "decimal"
     },
-    "tenor": {
-      "type": "string"
-    },
     "namaLeasing": {
       "type": "string"
     },
@@ -44,6 +41,9 @@
         "images",
         "files"
       ]
+    },
+    "tenor": {
+      "type": "string"
     }
   }
 }

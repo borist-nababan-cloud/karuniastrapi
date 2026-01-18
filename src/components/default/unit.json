@@ -19,9 +19,6 @@
     "noMesin": {
       "type": "string"
     },
-    "tahun": {
-      "type": "string"
-    },
     "lainLain": {
       "type": "text"
     },
@@ -35,6 +32,10 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::color.color"
+    },
+    "tahun": {
+      "type": "string",
+      "default": "2025"
     }
   }
 }

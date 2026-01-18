@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-12-18T08:07:25.707Z"
+    "x-generation-date": "2026-01-18T15:07:07.807Z"
   },
   "servers": [
     {
@@ -8234,9 +8234,6 @@
           "noMesin": {
             "type": "string"
           },
-          "tahun": {
-            "type": "string"
-          },
           "lainLain": {
             "type": "string"
           },
@@ -8257,6 +8254,9 @@
                 "type": "string"
               }
             }
+          },
+          "tahun": {
+            "type": "string"
           }
         }
       },
@@ -8280,9 +8280,6 @@
           "tandaJadi": {
             "type": "number",
             "format": "float"
-          },
-          "tenor": {
-            "type": "string"
           },
           "namaLeasing": {
             "type": "string"
@@ -8428,6 +8425,9 @@
                 }
               }
             }
+          },
+          "tenor": {
+            "type": "string"
           }
         }
       },

@@ -14,7 +14,7 @@ export interface DefaultUnit extends Struct.ComponentSchema {
     lainLain: Schema.Attribute.Text;
     noMesin: Schema.Attribute.String;
     noRangka: Schema.Attribute.String;
-    tahun: Schema.Attribute.String;
+    tahun: Schema.Attribute.String & Schema.Attribute.DefaultTo<'2025'>;
     vehicleType: Schema.Attribute.Relation<
       'oneToOne',
       'api::vehicle-type.vehicle-type'
