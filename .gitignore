@@ -138,3 +138,5 @@ build
 *.md
 !README.md
 !CLAUDE.md
+!docs/COOLIFY-DEPLOYMENT-GUIDE.md
+!docs/PROJECT_SUMMARY.md
